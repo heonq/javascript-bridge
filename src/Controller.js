@@ -21,6 +21,12 @@ class Controller {
     OutputView.printMessage(size);
     this.#bridge = BridgeMaker.makeBridge(size, generate);
   }
+
+  readDirection() {
+    InputView.readMoving(this.handleDirection.bind(this));
+  }
+
+  handleDirection(direction) {}
 }
 
 module.exports = Controller;
