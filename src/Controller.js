@@ -3,9 +3,16 @@ const InputView = require('./InputView');
 const Validator = require('../utils/Validator');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
+const BridgeGame = require('./BridgeGame');
 
 class Controller {
   #bridge;
+
+  #bridgeGame;
+
+  constructor() {
+    this.#bridgeGame = new BridgeGame();
+  }
 
   play() {
     OutputView.printIntro();
@@ -30,6 +37,10 @@ class Controller {
   handleDirection(direction) {
     if (!Validator.validateDirection(direction)) return this.readDirection();
     OutputView.printMessage(direction);
+    this.#bridgeGame.move(direction);
+    if (!this.#bridgeGame.checkBlocked && !this.#bridgeGame.checkSuccess) {
+      return this.readDirection();
+    }
   }
 }
 
