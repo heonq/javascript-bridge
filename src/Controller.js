@@ -14,6 +14,7 @@ class Controller {
 
   handleBridgeSize(size) {
     if (!Validator.validateBridgeSize(size)) return this.readBridgeSize();
+    OutputView.printMessage(size);
   }
 }
 
