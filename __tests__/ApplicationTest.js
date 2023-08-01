@@ -12,7 +12,6 @@ const mockQuestions = (answers) => {
     MissionUtils.Console.readLine,
   );
 };
-
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce(
@@ -20,7 +19,6 @@ const mockRandoms = (numbers) => {
     MissionUtils.Random.pickNumberInRange,
   );
 };
-
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
@@ -84,6 +82,6 @@ describe('다리 건너기 테스트', () => {
   });
 
   test('예외 테스트', () => {
-    runException(['a']);
+    runException(['a', '-2', '1', '21']);
   });
 });
