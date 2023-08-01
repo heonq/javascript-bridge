@@ -8,6 +8,15 @@ const Validator = {
     }
     return true;
   },
+  validateDirection(direction) {
+    if (direction !== direction.toUppercase()) {
+      return handleError(ERROR_MESSAGE.capital);
+    }
+    if (direction !== 'U' && direction !== 'D') {
+      return handleError(ERROR_MESSAGE.direction);
+    }
+    return true;
+  },
 };
 
 module.exports = Validator;

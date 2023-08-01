@@ -20,13 +20,17 @@ class Controller {
     if (!Validator.validateBridgeSize(size)) return this.readBridgeSize();
     OutputView.printMessage(size);
     this.#bridge = BridgeMaker.makeBridge(size, generate);
+    this.readDirection();
   }
 
   readDirection() {
     InputView.readMoving(this.handleDirection.bind(this));
   }
 
-  handleDirection(direction) {}
+  handleDirection(direction) {
+    if (!Validator.validateDirection(direction)) return this.readDirection();
+    OutputView.printMessage(direction);
+  }
 }
 
 module.exports = Controller;
