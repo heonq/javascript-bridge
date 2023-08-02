@@ -10,11 +10,8 @@ class Controller {
 
   #bridgeGame;
 
-  #trial;
-
   constructor() {
     this.#bridgeGame = new BridgeGame();
-    this.#trial = 1;
   }
 
   play() {
@@ -41,12 +38,18 @@ class Controller {
     if (!Validator.validateDirection(direction)) return this.readDirection();
     OutputView.printMessage(direction);
     this.#bridgeGame.move(direction, this.#bridge);
+    OutputView.printMap(this.#bridgeGame);
+    this.checkNextStep(direction);
   }
 
-  checkNextStep() {
-    if (this.#bridgeGame.checkBlocked()) {
+  checkNextStep(direction) {
+    if (this.#bridgeGame.checkBlocked(direction)) {
       return this.handleBlocked();
     }
+    if (this.#bridgeGame.checkSuccess(this.#bridge.length)) {
+      return OutputView.printResult(this.#bridgeGame, this.#bridge.length);
+    }
+    this.readDirection();
   }
 
   handleBlocked() {
@@ -55,6 +58,14 @@ class Controller {
 
   handleCommand(command) {
     if (!Validator.validateCommand(command)) return this.handleBlocked();
+    OutputView.printMessage(command);
+    if (command === 'R') return this.handleRestart();
+    return OutputView.printResult(this.#bridgeGame);
+  }
+
+  handleRestart() {
+    this.#bridgeGame.retry();
+    this.readDirection();
   }
 }
 

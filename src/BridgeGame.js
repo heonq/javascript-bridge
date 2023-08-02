@@ -8,6 +8,8 @@ class BridgeGame {
 
   #distance;
 
+  #trial;
+
   constructor() {
     this.#map = {
       U: [],
@@ -15,6 +17,8 @@ class BridgeGame {
     };
 
     this.#distance = 0;
+
+    this.#trial = 1;
   }
 
   #updateDistance() {
@@ -42,21 +46,29 @@ class BridgeGame {
   }
 
   checkBlocked(direction) {
-    if (this.#map[direction][this.#distance] === CONSTANTS.impassable) {
+    if (this.#map[direction][this.#distance - 1] === CONSTANTS.impassable) {
       return true;
     }
     return false;
   }
 
-  checkSuccess(bridge) {
-    if (this.#distance === bridge.length) {
+  checkSuccess(bridgeLength) {
+    if (this.#distance === bridgeLength) {
       return true;
     }
     return false;
+  }
+
+  getDistance() {
+    return this.#distance;
   }
 
   getMap() {
     return Object.entries(this.#map).map((array) => array[1]);
+  }
+
+  getTrial() {
+    return this.#trial;
   }
 
   /**
@@ -64,7 +76,18 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#initMap();
+    this.#updateDistance();
+    this.#trial += 1;
+  }
+
+  #initMap() {
+    this.#map = {
+      U: [],
+      D: [],
+    };
+  }
 }
 
 module.exports = BridgeGame;
