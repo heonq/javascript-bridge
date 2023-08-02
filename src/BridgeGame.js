@@ -18,7 +18,7 @@ class BridgeGame {
   }
 
   #updateDistance() {
-    this.#distance = this.#map[0].length;
+    this.#distance = this.#map.U.length;
   }
 
   /**
@@ -33,7 +33,8 @@ class BridgeGame {
 
   checkDirection(direction, bridge) {
     const upAndDown = [CONSTANTS.up, CONSTANTS.down];
-    this.#map[1 - upAndDown.indexOf(direction)].push(CONSTANTS.blank);
+    const elseDirection = upAndDown[1 - upAndDown.indexOf(direction)];
+    this.#map[elseDirection].push(CONSTANTS.blank);
     if (bridge[this.#distance] === direction) {
       return this.#map[direction].push(CONSTANTS.passable);
     }
