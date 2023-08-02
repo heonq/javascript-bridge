@@ -10,8 +10,11 @@ class Controller {
 
   #bridgeGame;
 
+  #trial;
+
   constructor() {
     this.#bridgeGame = new BridgeGame();
+    this.#trial = 1;
   }
 
   play() {
@@ -37,10 +40,21 @@ class Controller {
   handleDirection(direction) {
     if (!Validator.validateDirection(direction)) return this.readDirection();
     OutputView.printMessage(direction);
-    this.#bridgeGame.move(direction);
-    if (!this.#bridgeGame.checkBlocked && !this.#bridgeGame.checkSuccess) {
-      return this.readDirection();
+    this.#bridgeGame.move(direction, this.#bridge);
+  }
+
+  checkNextStep() {
+    if (this.#bridgeGame.checkBlocked()) {
+      return this.handleBlocked();
     }
+  }
+
+  handleBlocked() {
+    InputView.readGameCommand(this.handleCommand.bind(this));
+  }
+
+  handleCommand(command) {
+    if (!Validator.validateCommand(command)) return this.handleBlocked();
   }
 }
 
