@@ -39,10 +39,8 @@ class BridgeGame {
     const upAndDown = [CONSTANTS.up, CONSTANTS.down];
     const elseDirection = upAndDown[1 - upAndDown.indexOf(direction)];
     this.#map[elseDirection].push(CONSTANTS.blank);
-    if (bridge[this.#distance] === direction) {
-      return this.#map[direction].push(CONSTANTS.passable);
-    }
-    return this.#map[direction].push(CONSTANTS.impassable);
+    const result = bridge[this.#distance] === direction ? CONSTANTS.passable : CONSTANTS.impassable;
+    this.#map[direction].push(result);
   }
 
   checkBlocked(direction) {
@@ -57,10 +55,6 @@ class BridgeGame {
       return true;
     }
     return false;
-  }
-
-  getDistance() {
-    return this.#distance;
   }
 
   getMap() {
