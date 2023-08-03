@@ -17,4 +17,26 @@ describe('BridgeGame 단위 테스트', () => {
     directions.forEach((direction) => bridgeGame.move(direction, bridge));
     expect(bridgeGame.checkSuccess(bridge.length)).toEqual(result);
   });
+  test.each([
+    [
+      ['U', 'D', 'D'],
+      ['U', 'D', 'D'],
+      [
+        ['O', ' ', ' '],
+        [' ', 'O', 'O'],
+      ],
+    ],
+    [
+      ['U', 'D', 'D', 'U'],
+      ['U', 'D', 'D', 'D'],
+      [
+        ['O', ' ', ' ', ' '],
+        [' ', 'O', 'O', 'X'],
+      ],
+    ],
+  ])('다리를 건너간 다음 이동 경로를 출력하는 기능 테스트', (bridge, directions, result) => {
+    const bridgeGame = new BridgeGame();
+    directions.forEach((direction) => bridgeGame.move(direction, bridge));
+    expect(bridgeGame.getMap()).toEqual(result);
+  });
 });
