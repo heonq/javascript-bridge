@@ -15,4 +15,11 @@ describe('유효성 검사 테스트', () => {
     answers.forEach((answer) => Validator.validateBridgeSize(answer));
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(ERROR_MESSAGE.bridgeSize));
   });
+
+  test('이동할 칸 입력 유효성 검사 테스트', () => {
+    const logSpy = getLogSpy();
+    const answers = ['u', 'd', 'A', 'UU', 'DD'];
+    answers.forEach((answer) => Validator.validateDirection(answer));
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(ERROR_MESSAGE.direction));
+  });
 });
