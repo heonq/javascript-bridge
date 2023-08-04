@@ -25,7 +25,7 @@ class Controller {
 
   handleBridgeSize(size) {
     if (!Validator.validateBridgeSize(size)) return this.readBridgeSize();
-    OutputView.printMessage(size);
+    OutputView.printMessage(`${size}\n`);
     this.#bridge = BridgeMaker.makeBridge(size, generate);
     this.readDirection();
   }
@@ -36,7 +36,7 @@ class Controller {
 
   handleDirection(direction) {
     if (!Validator.validateDirection(direction)) return this.readDirection();
-    OutputView.printMessage(direction);
+    OutputView.printMessage(`${direction}\n`);
     this.#bridgeGame.move(direction, this.#bridge);
     OutputView.printMap(this.#bridgeGame);
     this.checkNextStep(direction);
@@ -58,7 +58,7 @@ class Controller {
 
   handleCommand(command) {
     if (!Validator.validateCommand(command)) return this.handleBlocked();
-    OutputView.printMessage(command);
+    OutputView.printMessage(`${command}\n`);
     if (command === 'R') return this.handleRestart();
     return OutputView.printResult(this.#bridgeGame);
   }
