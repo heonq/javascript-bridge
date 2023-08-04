@@ -9,17 +9,13 @@ const getLogSpy = () => {
 };
 
 describe('유효성 검사 테스트', () => {
-  test('다리 길이 입력 유효성 검사 테스트', () => {
+  test.each([
+    [[-1, 1, 21, 'a'], ERROR_MESSAGE.bridgeSize, Validator.validateBridgeSize],
+    [['u', 'd', 'A', 'UU', 'DD'], ERROR_MESSAGE.direction, Validator.validateDirection],
+    [['r', 'q', 'U', 'D', 'Retry', 'Quit'], ERROR_MESSAGE.command, Validator.validateCommand],
+  ])('사용자가 입력한 값에 대한 유효성 검사', (input, errorMessage, validateMethod) => {
     const logSpy = getLogSpy();
-    const answers = [-1, 1, 21, 'a'];
-    answers.forEach((answer) => Validator.validateBridgeSize(answer));
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(ERROR_MESSAGE.bridgeSize));
-  });
-
-  test('이동할 칸 입력 유효성 검사 테스트', () => {
-    const logSpy = getLogSpy();
-    const answers = ['u', 'd', 'A', 'UU', 'DD'];
-    answers.forEach((answer) => Validator.validateDirection(answer));
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(ERROR_MESSAGE.direction));
+    input.forEach((answer) => validateMethod(answer));
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(errorMessage));
   });
 });
