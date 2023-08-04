@@ -9,19 +9,12 @@ const Validator = {
     return true;
   },
   validateDirection(direction) {
-    if (direction !== direction.toUpperCase()) {
-      return handleError(ERROR_MESSAGE.capital);
-    }
     if (direction !== 'U' && direction !== 'D') {
       return handleError(ERROR_MESSAGE.direction);
     }
     return true;
   },
   validateCommand(command) {
-    if (command !== command.toUpperCase()) {
-      return handleError(ERROR_MESSAGE.capital);
-    }
-
     if (command !== 'R' && command !== 'Q') {
       return handleError(ERROR_MESSAGE.command);
     }
