@@ -19,6 +19,10 @@ class BridgeGameController {
   async handleLength(length) {
     if (!Validator.validateLength(length)) return this.readBridgeLength();
     this.bridgeGame = new BridgeGame(length);
+    this.readDirection();
+  }
+  async readDirection() {
+    const direction = await InputView.readDirection();
   }
 }
 
