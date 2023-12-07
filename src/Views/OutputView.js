@@ -26,6 +26,9 @@ const OutputView = {
   printError(error) {
     Console.print(error);
   },
+  printLineBreak() {
+    Console.print(MESSAGES.lineBreak);
+  },
 };
 
 export default OutputView;

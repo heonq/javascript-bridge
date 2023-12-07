@@ -22,6 +22,7 @@ class BridgeGameController {
     this.readDirection();
   }
   async readDirection() {
+    OutputView.printLineBreak();
     const direction = await InputView.readDirection();
     this.handleDirection(direction);
   }
