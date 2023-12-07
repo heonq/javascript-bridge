@@ -1,5 +1,12 @@
+import BridgeGameController from './BridgeGameController.js';
+
 class App {
-  async play() {}
+  async play() {
+    await new BridgeGameController().play();
+  }
 }
 
-module.exports = App;
+const app = new App();
+await app.play();
+
+export default App;
