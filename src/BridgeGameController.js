@@ -1,5 +1,6 @@
 import InputView from './Views/InputView.js';
 import OutputView from './Views/OutputView.js';
+import Validator from '../utils/Validator.js';
 
 class BridgeGameController {
   async play() {
@@ -8,10 +9,14 @@ class BridgeGameController {
 
   async printIntro() {
     OutputView.printIntro();
-    await this.readBridgeSize();
+    await this.readBridgeLength();
   }
-  async readBridgeSize() {
-    const Length = await InputView.readBridgeLength();
+  async readBridgeLength() {
+    const length = await InputView.readBridgeLength();
+    this.handleLength(length);
+  }
+  async handleLength(length) {
+    if (!Validator.validateLength(length)) return this.readBridgeLength();
   }
 }
 
