@@ -12,6 +12,11 @@ const Validator = {
       return handleError(MESSAGES.invalidLength);
     return true;
   },
+  validateDirection(direction) {
+    if (direction !== MESSAGES.up && direction !== MESSAGES.down)
+      return handleError(MESSAGES.invalidDirection);
+    return true;
+  },
 };
 
 export default Validator;

@@ -23,6 +23,10 @@ class BridgeGameController {
   }
   async readDirection() {
     const direction = await InputView.readDirection();
+    this.handleDirection(direction);
+  }
+  async handleDirection(direction) {
+    if (!Validator.validateDirection(direction)) return this.readDirection();
   }
 }
 
